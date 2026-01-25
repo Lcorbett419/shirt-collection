@@ -1,1321 +1,699 @@
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Luke's 197 Nations United</title>
-
     <style>
-
         * {
-
             margin: 0;
-
             padding: 0;
-
             box-sizing: border-box;
-
         }
-
- 
 
         body {
-
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-
             background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-
             min-height: 100vh;
-
             position: relative;
-
             overflow-x: hidden;
-
         }
-
- 
 
         body::before {
-
             content: '';
-
             position: fixed;
-
             top: 0;
-
             left: 0;
-
             width: 100%;
-
             height: 100%;
-
-            background-image:
-
+            background-image: 
                 repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(255,255,255,.03) 35px, rgba(255,255,255,.03) 70px),
-
                 repeating-linear-gradient(-45deg, transparent, transparent 35px, rgba(255,255,255,.03) 35px, rgba(255,255,255,.03) 70px);
-
             opacity: 0.5;
-
             z-index: 0;
-
         }
-
- 
 
         /* Navigation Menu */
-
         .nav-menu {
-
             position: fixed;
-
             top: 20px;
-
             right: 20px;
-
             z-index: 2000;
-
         }
-
- 
 
         .menu-button {
-
             background: rgba(255, 255, 255, 0.95);
-
             border: none;
-
             padding: 12px 20px;
-
             border-radius: 10px;
-
             font-size: 1.1em;
-
             font-weight: bold;
-
             color: #1e3c72;
-
             cursor: pointer;
-
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-
             transition: all 0.3s;
-
             display: flex;
-
             align-items: center;
-
             gap: 8px;
-
         }
-
- 
 
         .menu-button:hover {
-
             background: white;
-
             transform: translateY(-2px);
-
             box-shadow: 0 7px 20px rgba(0,0,0,0.3);
-
         }
-
- 
 
         .dropdown-content {
-
             display: none;
-
             position: absolute;
-
             right: 0;
-
             top: 50px;
-
             background: rgba(255, 255, 255, 0.95);
-
             min-width: 180px;
-
             box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-
             border-radius: 10px;
-
             overflow: hidden;
-
         }
-
- 
 
         .dropdown-content.show {
-
             display: block;
-
             animation: slideDown 0.3s;
-
         }
-
- 
 
         @keyframes slideDown {
-
             from {
-
                 opacity: 0;
-
                 transform: translateY(-10px);
-
             }
-
             to {
-
                 opacity: 1;
-
                 transform: translateY(0);
-
             }
-
         }
-
- 
 
         .dropdown-content a {
-
             color: #1e3c72;
-
             padding: 15px 20px;
-
             text-decoration: none;
-
             display: block;
-
             transition: all 0.3s;
-
             font-weight: 500;
-
         }
-
- 
 
         .dropdown-content a:hover {
-
             background: #2a5298;
-
             color: white;
-
         }
-
- 
 
         .dropdown-content a.active {
-
             background: #1e3c72;
-
             color: white;
-
         }
-
- 
 
         .container {
-
             position: relative;
-
             z-index: 1;
-
             max-width: 1400px;
-
             margin: 0 auto;
-
             padding: 40px 20px;
-
         }
-
- 
 
         header {
-
             text-align: center;
-
             margin-bottom: 50px;
-
             background: rgba(255, 255, 255, 0.95);
-
             padding: 40px 20px;
-
             border-radius: 20px;
-
             box-shadow: 0 10px 40px rgba(0,0,0,0.2);
-
         }
-
- 
 
         h1 {
-
             color: #1e3c72;
-
             font-size: 3em;
-
             margin-bottom: 10px;
-
             text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
-
         }
-
- 
 
         .subtitle {
-
             color: #555;
-
             font-size: 1.2em;
-
             font-style: italic;
-
         }
-
- 
 
         .count {
-
             margin-top: 15px;
-
             font-size: 1.1em;
-
             color: #2a5298;
-
             font-weight: bold;
-
         }
-
- 
 
         .search-box {
-
             margin: 30px auto;
-
             max-width: 500px;
-
         }
-
- 
 
         .search-box input {
-
             width: 100%;
-
             padding: 15px 20px;
-
             font-size: 1.1em;
-
             border: 3px solid #2a5298;
-
             border-radius: 50px;
-
             outline: none;
-
             transition: all 0.3s;
-
         }
-
- 
 
         .search-box input:focus {
-
             border-color: #1e3c72;
-
             box-shadow: 0 0 20px rgba(30, 60, 114, 0.3);
-
         }
-
- 
 
         .countries-grid {
-
             display: grid;
-
             grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-
             gap: 20px;
-
             margin-top: 30px;
-
         }
-
- 
 
         .country-card {
-
             background: rgba(255, 255, 255, 0.95);
-
             padding: 20px;
-
             border-radius: 15px;
-
             text-align: center;
-
             cursor: pointer;
-
             transition: all 0.3s;
-
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-
             border: 3px solid transparent;
-
+            position: relative;
         }
-
- 
 
         .country-card:hover {
-
             transform: translateY(-5px);
-
             box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-
             border-color: #2a5298;
-
         }
 
- 
+        .country-card.collected {
+            border-color: #28a745;
+            background: rgba(40, 167, 69, 0.05);
+        }
+
+        .checkbox {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 24px;
+            height: 24px;
+            border: 3px solid #2a5298;
+            border-radius: 6px;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            font-weight: bold;
+            color: #28a745;
+        }
+
+        .country-card.collected .checkbox {
+            background: #28a745;
+            border-color: #28a745;
+            color: white;
+        }
 
         .flag {
-
             font-size: 4em;
-
             margin-bottom: 10px;
-
             display: block;
-
+            line-height: 1;
         }
-
- 
 
         .country-name {
-
             color: #1e3c72;
-
             font-weight: bold;
-
-            font-size: 1em;
-
+            font-size: 0.95em;
+            margin-top: 5px;
         }
-
- 
 
         .modal {
-
             display: none;
-
             position: fixed;
-
             z-index: 1000;
-
             left: 0;
-
             top: 0;
-
             width: 100%;
-
             height: 100%;
-
             background-color: rgba(0,0,0,0.9);
-
             animation: fadeIn 0.3s;
-
         }
-
- 
 
         @keyframes fadeIn {
-
             from { opacity: 0; }
-
             to { opacity: 1; }
-
         }
-
- 
 
         .modal-content {
-
             position: relative;
-
             margin: 5% auto;
-
             padding: 30px;
-
             width: 90%;
-
             max-width: 800px;
-
             background: white;
-
             border-radius: 20px;
-
             animation: slideIn 0.3s;
-
         }
-
- 
 
         @keyframes slideIn {
-
             from { transform: translateY(-50px); opacity: 0; }
-
             to { transform: translateY(0); opacity: 1; }
-
         }
-
- 
 
         .close {
-
             position: absolute;
-
             right: 20px;
-
             top: 20px;
-
             font-size: 35px;
-
             font-weight: bold;
-
             color: #aaa;
-
             cursor: pointer;
-
             transition: color 0.3s;
-
         }
-
- 
 
         .close:hover {
-
             color: #000;
-
         }
-
- 
 
         .modal-title {
-
             color: #1e3c72;
-
             font-size: 2em;
-
             margin-bottom: 20px;
-
             text-align: center;
-
         }
-
- 
 
         .shirt-placeholder {
-
             width: 100%;
-
             height: 400px;
-
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-
             border-radius: 15px;
-
             display: flex;
-
             align-items: center;
-
             justify-content: center;
-
             color: white;
-
             font-size: 1.5em;
-
             text-align: center;
-
             padding: 20px;
-
         }
-
- 
 
         /* Page Content Sections */
-
         .page-content {
-
             display: none;
-
         }
-
- 
 
         .page-content.active {
-
             display: block;
-
         }
-
- 
 
         .content-box {
-
             background: rgba(255, 255, 255, 0.95);
-
             padding: 40px;
-
             border-radius: 20px;
-
             box-shadow: 0 10px 40px rgba(0,0,0,0.2);
-
             max-width: 900px;
-
             margin: 0 auto;
-
         }
-
- 
 
         .content-box h2 {
-
             color: #1e3c72;
-
             font-size: 2.5em;
-
             margin-bottom: 20px;
-
         }
-
- 
 
         .content-box p {
-
             color: #555;
-
             font-size: 1.1em;
-
             line-height: 1.8;
-
             margin-bottom: 15px;
-
         }
-
- 
 
         .contact-form {
-
             margin-top: 30px;
-
         }
-
- 
 
         .form-group {
-
             margin-bottom: 20px;
-
         }
-
- 
 
         .form-group label {
-
             display: block;
-
             color: #1e3c72;
-
             font-weight: bold;
-
             margin-bottom: 8px;
-
         }
-
- 
 
         .form-group input,
-
         .form-group textarea {
-
             width: 100%;
-
             padding: 12px 15px;
-
             border: 2px solid #2a5298;
-
             border-radius: 10px;
-
             font-size: 1em;
-
             font-family: inherit;
-
             transition: all 0.3s;
-
         }
-
- 
 
         .form-group input:focus,
-
         .form-group textarea:focus {
-
             outline: none;
-
             border-color: #1e3c72;
-
             box-shadow: 0 0 15px rgba(30, 60, 114, 0.2);
-
         }
-
- 
 
         .form-group textarea {
-
             resize: vertical;
-
             min-height: 120px;
-
         }
-
- 
 
         .submit-btn {
-
             background: #2a5298;
-
             color: white;
-
             border: none;
-
             padding: 15px 40px;
-
             font-size: 1.1em;
-
             font-weight: bold;
-
             border-radius: 10px;
-
             cursor: pointer;
-
             transition: all 0.3s;
-
         }
-
- 
 
         .submit-btn:hover {
-
             background: #1e3c72;
-
             transform: translateY(-2px);
-
             box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-
         }
-
- 
 
         .hidden {
-
             display: none;
-
         }
-
     </style>
-
 </head>
-
 <body>
-
     <!-- Navigation Menu -->
-
     <div class="nav-menu">
-
         <button class="menu-button" onclick="toggleMenu()">
-
             ☰ Menu
-
         </button>
-
         <div class="dropdown-content" id="dropdownMenu">
-
             <a href="#" class="active" onclick="showPage('home')">🏠 Home</a>
-
             <a href="#" onclick="showPage('about')">👤 About Me</a>
-
             <a href="#" onclick="showPage('contact')">✉️ Get in Contact</a>
-
         </div>
-
     </div>
-
- 
 
     <div class="container">
-
         <!-- Home Page -->
-
         <div id="homePage" class="page-content active">
-
             <header>
-
                 <h1>🌍 Luke's 197 Nations United</h1>
-
                 <p class="subtitle">A Complete Collection of National Team Shirts</p>
-
-                <p class="count">197 Countries • 197 Shirts • 1 Passion</p>
-
-               
-
+                <p class="count">197 Countries • 26 Collected • 171 To Go</p>
+                
                 <div class="search-box">
-
                     <input type="text" id="searchInput" placeholder="Search for a country...">
-
                 </div>
-
             </header>
 
- 
-
             <div class="countries-grid" id="countriesGrid"></div>
-
         </div>
-
- 
 
         <!-- About Me Page -->
-
         <div id="aboutPage" class="page-content">
-
             <div class="content-box">
-
                 <h2>About Me</h2>
-
                 <p>Welcome to my collection! I'm Luke, a 23-year-old from Newcastle and a massive Newcastle United fan. I'm on an ambitious journey to visit all 197 nations and collect an authentic national team football shirt from each country I step foot in.</p>
-
-               
-
+                
                 <p><strong>The Mission:</strong><br>
-
                 This isn't just about collecting shirts - it's about experiencing the world through football. Every shirt must be acquired in person, in that country. No online orders, no shortcuts. If I want the shirt, I have to make the journey. Currently, I'm at 26 countries and counting, with 171 more adventures ahead of me.</p>
-
-               
-
+                
                 <p><strong>The Rules:</strong><br>
-
                 I've set myself a simple but challenging rule: I can only add a shirt to this collection if I've physically been to that country and purchased it there. This means each shirt represents not just a piece of football history, but a personal memory, a place I've explored, and people I've met along the way.</p>
-
-               
-
+                
                 <p><strong>Why I Started:</strong><br>
-
                 Growing up in Newcastle, football has always been more than just a sport - it's a way of life. Supporting the Toon through thick and thin taught me about loyalty, passion, and community. I wanted to take that same passion and explore how football connects people across every corner of the globe.</p>
-
-               
-
+                
                 <p><strong>The Journey So Far:</strong><br>
-
                 From the iconic kits of football powerhouses to the rare finds from nations where football is still growing, each of my 26 shirts has its own story. Some were easy to find in official stores, others required hunting through local markets and sports shops, asking locals for help, and sometimes a bit of luck.</p>
-
-               
-
+                
                 <p><strong>The Dream:</strong><br>
-
                 171 countries to go. Some will be easier than others - I'm equally excited about ticking off the football giants and discovering the passion for the game in places where it's less prominent. Every nation, every shirt, every journey matters equally in this quest.</p>
-
-               
-
+                
                 <p><strong>Follow Along:</strong><br>
-
                 This website will grow as I do. Each new country visited means another shirt added to the collection. Here's to the next 171 adventures! Howay the lads! 🖤🤍</p>
-
             </div>
-
         </div>
-
- 
 
         <!-- Contact Page -->
-
         <div id="contactPage" class="page-content">
-
             <div class="content-box">
-
                 <h2>Get in Contact</h2>
-
                 <p>Have a question about my collection? Want to share your own collecting journey? Or perhaps you have a rare shirt you think I might be interested in?</p>
-
                 <p>I'd love to hear from you!</p>
-
-               
-
+                
                 <form class="contact-form" action="https://formspree.io/f/xeeayzdg" method="POST">
-
                     <div class="form-group">
-
                         <label for="name">Your Name</label>
-
                         <input type="text" name="name" id="name" required>
-
                     </div>
-
-                   
-
-                    <div class="form-group">
-
-                        <label for="email">Your Email</label>
-
-                        <input type="email" name="email" id="email" required>
-
-                    </div>
-
-                   
-
-                    <div class="form-group">
-
-                        <label for="message">Message</label>
-
-                        <textarea name="message" id="message" required></textarea>
-
-                    </div>
-
                     
-
+                    <div class="form-group">
+                        <label for="email">Your Email</label>
+                        <input type="email" name="email" id="email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea name="message" id="message" required></textarea>
+                    </div>
+                    
                     <button type="submit" class="submit-btn">Send Message</button>
-
                 </form>
-
             </div>
-
         </div>
-
     </div>
-
- 
 
     <div id="shirtModal" class="modal">
-
         <div class="modal-content">
-
             <span class="close">&times;</span>
-
             <h2 class="modal-title" id="modalTitle"></h2>
-
             <div class="shirt-placeholder" id="shirtImage">
-
                 📸 Upload your shirt photo here!<br>
-
                 <small style="font-size: 0.7em; margin-top: 10px; display: block;">
-
                     Replace this placeholder with your actual shirt image
-
                 </small>
-
             </div>
-
         </div>
-
     </div>
 
- 
-
     <script>
-
         const countries = [
-
             {name: "Afghanistan", flag: "🇦🇫"}, {name: "Albania", flag: "🇦🇱"}, {name: "Algeria", flag: "🇩🇿"},
-
             {name: "Andorra", flag: "🇦🇩"}, {name: "Angola", flag: "🇦🇴"}, {name: "Antigua and Barbuda", flag: "🇦🇬"},
-
             {name: "Argentina", flag: "🇦🇷"}, {name: "Armenia", flag: "🇦🇲"}, {name: "Australia", flag: "🇦🇺"},
-
             {name: "Austria", flag: "🇦🇹"}, {name: "Azerbaijan", flag: "🇦🇿"}, {name: "Bahamas", flag: "🇧🇸"},
-
             {name: "Bahrain", flag: "🇧🇭"}, {name: "Bangladesh", flag: "🇧🇩"}, {name: "Barbados", flag: "🇧🇧"},
-
             {name: "Belarus", flag: "🇧🇾"}, {name: "Belgium", flag: "🇧🇪"}, {name: "Belize", flag: "🇧🇿"},
-
             {name: "Benin", flag: "🇧🇯"}, {name: "Bhutan", flag: "🇧🇹"}, {name: "Bolivia", flag: "🇧🇴"},
-
             {name: "Bosnia and Herzegovina", flag: "🇧🇦"}, {name: "Botswana", flag: "🇧🇼"}, {name: "Brazil", flag: "🇧🇷"},
-
             {name: "Brunei", flag: "🇧🇳"}, {name: "Bulgaria", flag: "🇧🇬"}, {name: "Burkina Faso", flag: "🇧🇫"},
-
             {name: "Burundi", flag: "🇧🇮"}, {name: "Cabo Verde", flag: "🇨🇻"}, {name: "Cambodia", flag: "🇰🇭"},
-
             {name: "Cameroon", flag: "🇨🇲"}, {name: "Canada", flag: "🇨🇦"}, {name: "Central African Republic", flag: "🇨🇫"},
-
             {name: "Chad", flag: "🇹🇩"}, {name: "Chile", flag: "🇨🇱"}, {name: "China", flag: "🇨🇳"},
-
             {name: "Colombia", flag: "🇨🇴"}, {name: "Comoros", flag: "🇰🇲"}, {name: "Congo (Congo-Brazzaville)", flag: "🇨🇬"},
-
             {name: "Costa Rica", flag: "🇨🇷"}, {name: "Croatia", flag: "🇭🇷"}, {name: "Cuba", flag: "🇨🇺"},
-
             {name: "Cyprus", flag: "🇨🇾"}, {name: "Czechia", flag: "🇨🇿"}, {name: "Democratic Republic of the Congo", flag: "🇨🇩"},
-
             {name: "Denmark", flag: "🇩🇰"}, {name: "Djibouti", flag: "🇩🇯"}, {name: "Dominica", flag: "🇩🇲"},
-
             {name: "Dominican Republic", flag: "🇩🇴"}, {name: "Ecuador", flag: "🇪🇨"}, {name: "Egypt", flag: "🇪🇬"},
-
             {name: "El Salvador", flag: "🇸🇻"}, {name: "Equatorial Guinea", flag: "🇬🇶"}, {name: "Eritrea", flag: "🇪🇷"},
-
             {name: "Estonia", flag: "🇪🇪"}, {name: "Eswatini", flag: "🇸🇿"}, {name: "Ethiopia", flag: "🇪🇹"},
-
             {name: "Fiji", flag: "🇫🇯"}, {name: "Finland", flag: "🇫🇮"}, {name: "France", flag: "🇫🇷"},
-
             {name: "Gabon", flag: "🇬🇦"}, {name: "Gambia", flag: "🇬🇲"}, {name: "Georgia", flag: "🇬🇪"},
-
             {name: "Germany", flag: "🇩🇪"}, {name: "Ghana", flag: "🇬🇭"}, {name: "Greece", flag: "🇬🇷"},
-
             {name: "Grenada", flag: "🇬🇩"}, {name: "Guatemala", flag: "🇬🇹"}, {name: "Guinea", flag: "🇬🇳"},
-
             {name: "Guinea-Bissau", flag: "🇬🇼"}, {name: "Guyana", flag: "🇬🇾"}, {name: "Haiti", flag: "🇭🇹"},
-
             {name: "Honduras", flag: "🇭🇳"}, {name: "Hungary", flag: "🇭🇺"}, {name: "Iceland", flag: "🇮🇸"},
-
             {name: "India", flag: "🇮🇳"}, {name: "Indonesia", flag: "🇮🇩"}, {name: "Iran", flag: "🇮🇷"},
-
             {name: "Iraq", flag: "🇮🇶"}, {name: "Ireland", flag: "🇮🇪"}, {name: "Israel", flag: "🇮🇱"},
-
             {name: "Italy", flag: "🇮🇹"}, {name: "Jamaica", flag: "🇯🇲"}, {name: "Japan", flag: "🇯🇵"},
-
             {name: "Jordan", flag: "🇯🇴"}, {name: "Kazakhstan", flag: "🇰🇿"}, {name: "Kenya", flag: "🇰🇪"},
-
             {name: "Kiribati", flag: "🇰🇮"}, {name: "Kosovo", flag: "🇽🇰"}, {name: "Kuwait", flag: "🇰🇼"},
-
             {name: "Kyrgyzstan", flag: "🇰🇬"}, {name: "Laos", flag: "🇱🇦"}, {name: "Latvia", flag: "🇱🇻"},
-
             {name: "Lebanon", flag: "🇱🇧"}, {name: "Lesotho", flag: "🇱🇸"}, {name: "Liberia", flag: "🇱🇷"},
-
             {name: "Libya", flag: "🇱🇾"}, {name: "Liechtenstein", flag: "🇱🇮"}, {name: "Lithuania", flag: "🇱🇹"},
-
             {name: "Luxembourg", flag: "🇱🇺"}, {name: "Madagascar", flag: "🇲🇬"}, {name: "Malawi", flag: "🇲🇼"},
-
             {name: "Malaysia", flag: "🇲🇾"}, {name: "Maldives", flag: "🇲🇻"}, {name: "Mali", flag: "🇲🇱"},
-
             {name: "Malta", flag: "🇲🇹"}, {name: "Marshall Islands", flag: "🇲🇭"}, {name: "Mauritania", flag: "🇲🇷"},
-
             {name: "Mauritius", flag: "🇲🇺"}, {name: "Mexico", flag: "🇲🇽"}, {name: "Micronesia", flag: "🇫🇲"},
-
             {name: "Moldova", flag: "🇲🇩"}, {name: "Monaco", flag: "🇲🇨"}, {name: "Mongolia", flag: "🇲🇳"},
-
             {name: "Montenegro", flag: "🇲🇪"}, {name: "Morocco", flag: "🇲🇦"}, {name: "Mozambique", flag: "🇲🇿"},
-
             {name: "Myanmar", flag: "🇲🇲"}, {name: "Namibia", flag: "🇳🇦"}, {name: "Nauru", flag: "🇳🇷"},
-
             {name: "Nepal", flag: "🇳🇵"}, {name: "Netherlands", flag: "🇳🇱"}, {name: "New Zealand", flag: "🇳🇿"},
-
             {name: "Nicaragua", flag: "🇳🇮"}, {name: "Niger", flag: "🇳🇪"}, {name: "Nigeria", flag: "🇳🇬"},
-
             {name: "North Korea", flag: "🇰🇵"}, {name: "North Macedonia", flag: "🇲🇰"}, {name: "Norway", flag: "🇳🇴"},
-
             {name: "Oman", flag: "🇴🇲"}, {name: "Pakistan", flag: "🇵🇰"}, {name: "Palau", flag: "🇵🇼"},
-
             {name: "Palestine", flag: "🇵🇸"}, {name: "Panama", flag: "🇵🇦"}, {name: "Papua New Guinea", flag: "🇵🇬"},
-
             {name: "Paraguay", flag: "🇵🇾"}, {name: "Peru", flag: "🇵🇪"}, {name: "Philippines", flag: "🇵🇭"},
-
             {name: "Poland", flag: "🇵🇱"}, {name: "Portugal", flag: "🇵🇹"}, {name: "Qatar", flag: "🇶🇦"},
-
             {name: "Romania", flag: "🇷🇴"}, {name: "Russia", flag: "🇷🇺"}, {name: "Rwanda", flag: "🇷🇼"},
-
             {name: "Saint Kitts and Nevis", flag: "🇰🇳"}, {name: "Saint Lucia", flag: "🇱🇨"}, {name: "Saint Vincent and the Grenadines", flag: "🇻🇨"},
-
             {name: "Samoa", flag: "🇼🇸"}, {name: "San Marino", flag: "🇸🇲"}, {name: "Sao Tome and Principe", flag: "🇸🇹"},
-
             {name: "Saudi Arabia", flag: "🇸🇦"}, {name: "Senegal", flag: "🇸🇳"}, {name: "Serbia", flag: "🇷🇸"},
-
             {name: "Seychelles", flag: "🇸🇨"}, {name: "Sierra Leone", flag: "🇸🇱"}, {name: "Singapore", flag: "🇸🇬"},
-
             {name: "Slovakia", flag: "🇸🇰"}, {name: "Slovenia", flag: "🇸🇮"}, {name: "Solomon Islands", flag: "🇸🇧"},
-
             {name: "Somalia", flag: "🇸🇴"}, {name: "South Africa", flag: "🇿🇦"}, {name: "South Korea", flag: "🇰🇷"},
-
             {name: "South Sudan", flag: "🇸🇸"}, {name: "Spain", flag: "🇪🇸"}, {name: "Sri Lanka", flag: "🇱🇰"},
-
             {name: "Sudan", flag: "🇸🇩"}, {name: "Suriname", flag: "🇸🇷"}, {name: "Sweden", flag: "🇸🇪"},
-
             {name: "Switzerland", flag: "🇨🇭"}, {name: "Syria", flag: "🇸🇾"}, {name: "Taiwan", flag: "🇹🇼"},
-
             {name: "Tajikistan", flag: "🇹🇯"}, {name: "Tanzania", flag: "🇹🇿"}, {name: "Thailand", flag: "🇹🇭"},
-
             {name: "Timor-Leste", flag: "🇹🇱"}, {name: "Togo", flag: "🇹🇬"}, {name: "Tonga", flag: "🇹🇴"},
-
             {name: "Trinidad and Tobago", flag: "🇹🇹"}, {name: "Tunisia", flag: "🇹🇳"}, {name: "Turkey", flag: "🇹🇷"},
-
             {name: "Turkmenistan", flag: "🇹🇲"}, {name: "Tuvalu", flag: "🇹🇻"}, {name: "Uganda", flag: "🇺🇬"},
-
             {name: "Ukraine", flag: "🇺🇦"}, {name: "United Arab Emirates", flag: "🇦🇪"}, {name: "United Kingdom", flag: "🇬🇧"},
-
             {name: "United States", flag: "🇺🇸"}, {name: "Uruguay", flag: "🇺🇾"}, {name: "Uzbekistan", flag: "🇺🇿"},
-
             {name: "Vanuatu", flag: "🇻🇺"}, {name: "Vatican City", flag: "🇻🇦"}, {name: "Venezuela", flag: "🇻🇪"},
-
             {name: "Vietnam", flag: "🇻🇳"}, {name: "Yemen", flag: "🇾🇪"}, {name: "Zambia", flag: "🇿🇲"},
-
             {name: "Zimbabwe", flag: "🇿🇼"}
-
         ];
 
- 
-
         const grid = document.getElementById('countriesGrid');
-
         const modal = document.getElementById('shirtModal');
-
         const closeBtn = document.querySelector('.close');
-
         const searchInput = document.getElementById('searchInput');
 
- 
-
         function renderCountries(filter = '') {
-
             grid.innerHTML = '';
-
-            const filtered = countries.filter(c =>
-
+            const filtered = countries.filter(c => 
                 c.name.toLowerCase().includes(filter.toLowerCase())
-
             );
 
- 
-
             filtered.forEach(country => {
-
                 const card = document.createElement('div');
-
                 card.className = 'country-card';
-
+                
+                // Add 'collected' class if we have a photo for this country
+                if (countriesWithPhotos[country.name]) {
+                    card.classList.add('collected');
+                }
+                
                 card.innerHTML = `
-
+                    <div class="checkbox">${countriesWithPhotos[country.name] ? '✓' : ''}</div>
                     <span class="flag">${country.flag}</span>
-
                     <div class="country-name">${country.name}</div>
-
                 `;
-
                 card.onclick = () => openModal(country);
-
                 grid.appendChild(card);
-
             });
-
         }
-
- 
 
         // Countries with photos
-
         const countriesWithPhotos = {
-
             'Antigua and Barbuda': 'antiguaandbarbuda.jpeg',
-
             'Argentina': 'argentina.jpeg',
-
             'Austria': 'austria.jpeg',
-
             'Belgium': 'belgium.jpeg',
-
             'Bolivia': 'bolivia.jpeg',
-
             'Brazil': 'brazil.jpeg',
-
             'Canada': 'canada.jpeg',
-
             'Chile': 'chile.jpeg',
-
             'Colombia': 'colombia.jpeg',
-
             'Costa Rica': 'costarica.jpeg',
-
             'Czechia': 'czechia.jpeg',
-
             'Denmark': 'denmark.jpeg',
-
             'Dominican Republic': 'dominicanrepublic.jpeg',
-
             'United Kingdom': 'unitedkingdom.jpeg',
-
             'Grenada': 'grenada.jpeg',
-
             'Hungary': 'hungary.jpeg',
-
             'Jamaica': 'jamaica.jpeg',
-
             'Netherlands': 'netherlands.jpeg',
-
             'Panama': 'panama.jpeg',
-
             'Paraguay': 'paraguay.jpeg',
-
             'Peru': 'peru.jpeg',
-
             'Portugal': 'portugal.jpeg',
-
             'Slovakia': 'slovakia.jpeg',
-
             'Saint Lucia': 'saintlucia.jpeg',
-
             'Sweden': 'sweden.jpeg',
-
             'Uruguay': 'uruguay.jpeg'
-
         };
-
- 
 
         function openModal(country) {
-
             document.getElementById('modalTitle').textContent = country.name + ' ' + country.flag;
-
-           
-
+            
             // Check if we have a photo for this country
-
             const shirtImage = document.getElementById('shirtImage');
-
             if (countriesWithPhotos[country.name]) {
-
                 shirtImage.innerHTML = `<img src="${countriesWithPhotos[country.name]}" alt="${country.name} National Team Shirt" style="width: 100%; height: 100%; object-fit: contain; border-radius: 15px;">`;
-
             } else {
-
                 shirtImage.innerHTML = `📸 Coming soon!<br>
-
                     <small style="font-size: 0.7em; margin-top: 10px; display: block;">
-
                         This shirt will be added when I visit ${country.name}
-
                     </small>`;
-
             }
-
-           
-
+            
             modal.style.display = 'block';
-
         }
-
- 
 
         closeBtn.onclick = () => modal.style.display = 'none';
-
         window.onclick = (e) => {
-
             if (e.target === modal) modal.style.display = 'none';
-
         };
 
- 
-
         searchInput.addEventListener('input', (e) => {
-
             renderCountries(e.target.value);
-
         });
-
- 
 
         // Navigation functions
-
         function toggleMenu() {
-
             const menu = document.getElementById('dropdownMenu');
-
             menu.classList.toggle('show');
-
         }
-
- 
 
         function showPage(pageName) {
-
             // Hide all pages
-
             document.querySelectorAll('.page-content').forEach(page => {
-
                 page.classList.remove('active');
-
             });
-
-           
-
+            
             // Remove active class from all menu items
-
             document.querySelectorAll('.dropdown-content a').forEach(link => {
-
                 link.classList.remove('active');
-
             });
-
-           
-
+            
             // Show selected page
-
             if (pageName === 'home') {
-
                 document.getElementById('homePage').classList.add('active');
-
                 document.querySelector('a[onclick*="home"]').classList.add('active');
-
             } else if (pageName === 'about') {
-
                 document.getElementById('aboutPage').classList.add('active');
-
                 document.querySelector('a[onclick*="about"]').classList.add('active');
-
             } else if (pageName === 'contact') {
-
                 document.getElementById('contactPage').classList.add('active');
-
                 document.querySelector('a[onclick*="contact"]').classList.add('active');
-
             }
-
-           
-
+            
             // Close menu
-
             document.getElementById('dropdownMenu').classList.remove('show');
-
         }
 
- 
 
- 
-
- 
 
         // Close dropdown when clicking outside
-
         window.addEventListener('click', function(e) {
-
             if (!e.target.matches('.menu-button') && !e.target.closest('.menu-button')) {
-
                 const dropdown = document.getElementById('dropdownMenu');
-
                 if (dropdown.classList.contains('show')) {
-
                     dropdown.classList.remove('show');
-
                 }
-
             }
-
         });
 
- 
-
         renderCountries();
-
     </script>
-
 </body>
-
 </html>
