@@ -398,25 +398,28 @@
             display: none;
         }
 
-        /* Map Country Cards */
-        .map-region {
-            cursor: pointer;
+        /* Map tile styling */
+        .map-tile {
+            background: #e9ecef;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.95em;
             transition: all 0.3s;
+            border: 2px solid #dee2e6;
         }
 
-        .map-region:hover {
-            opacity: 0.8;
-            filter: brightness(1.1);
+        .map-tile.collected {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+            cursor: pointer;
+            border-color: #28a745;
         }
 
-        .map-region.collected path,
-        .map-region.collected circle {
-            fill: #28a745 !important;
-        }
-
-        .map-region:not(.collected) path,
-        .map-region:not(.collected) circle {
-            fill: #ccc;
+        .map-tile.collected:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(40, 167, 69, 0.3);
         }
     </style>
 </head>
