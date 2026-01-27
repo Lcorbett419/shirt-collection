@@ -397,6 +397,35 @@
         .hidden {
             display: none;
         }
+
+        /* Map Country Cards */
+        .map-country {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border: 3px solid #ddd;
+        }
+
+        .map-country.collected {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            border-color: #28a745;
+            color: white;
+        }
+
+        .map-country:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .map-country div {
+            margin-top: 10px;
+            font-weight: bold;
+            font-size: 0.95em;
+        }
     </style>
 </head>
 <body>
@@ -407,6 +436,7 @@
         </button>
         <div class="dropdown-content" id="dropdownMenu">
             <a href="#" class="active" onclick="showPage('home')">🏠 Home</a>
+            <a href="#" onclick="showPage('map')">🗺️ My Map</a>
             <a href="#" onclick="showPage('about')">👤 About Me</a>
             <a href="#" onclick="showPage('contact')">✉️ Get in Contact</a>
         </div>
@@ -426,6 +456,121 @@
             </header>
 
             <div class="countries-grid" id="countriesGrid"></div>
+        </div>
+
+        <!-- Map Page -->
+        <div id="mapPage" class="page-content">
+            <div class="content-box" style="max-width: 1200px;">
+                <h2>🗺️ My World Map</h2>
+                <p style="margin-bottom: 30px;">Countries highlighted in green are where I've collected shirts. Click on a country to see the shirt!</p>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin-top: 30px;">
+                    <div class="map-country collected" onclick="openModal({name: 'Antigua and Barbuda', flag: '🇦🇬'})">
+                        <span style="font-size: 2em;">🇦🇬</span>
+                        <div>Antigua and Barbuda</div>
+                    </div>
+                    <div class="map-country collected" onclick="openModal({name: 'Argentina', flag: '🇦🇷'})">
+                        <span style="font-size: 2em;">🇦🇷</span>
+                        <div>Argentina</div>
+                    </div>
+                    <div class="map-country collected" onclick="openModal({name: 'Austria', flag: '🇦🇹'})">
+                        <span style="font-size: 2em;">🇦🇹</span>
+                        <div>Austria</div>
+                    </div>
+                    <div class="map-country collected" onclick="openModal({name: 'Belgium', flag: '🇧🇪'})">
+                        <span style="font-size: 2em;">🇧🇪</span>
+                        <div>Belgium</div>
+                    </div>
+                    <div class="map-country collected" onclick="openModal({name: 'Bolivia', flag: '🇧🇴'})">
+                        <span style="font-size: 2em;">🇧🇴</span>
+                        <div>Bolivia</div>
+                    </div>
+                    <div class="map-country collected" onclick="openModal({name: 'Brazil', flag: '🇧🇷'})">
+                        <span style="font-size: 2em;">🇧🇷</span>
+                        <div>Brazil</div>
+                    </div>
+                    <div class="map-country collected" onclick="openModal({name: 'Canada', flag: '🇨🇦'})">
+                        <span style="font-size: 2em;">🇨🇦</span>
+                        <div>Canada</div>
+                    </div>
+                    <div class="map-country collected" onclick="openModal({name: 'Chile', flag: '🇨🇱'})">
+                        <span style="font-size: 2em;">🇨🇱</span>
+                        <div>Chile</div>
+                    </div>
+                    <div class="map-country collected" onclick="openModal({name: 'Colombia', flag: '🇨🇴'})">
+                        <span style="font-size: 2em;">🇨🇴</span>
+                        <div>Colombia</div>
+                    </div>
+                    <div class="map-country collected" onclick="openModal({name: 'Costa Rica', flag: '🇨🇷'})">
+                        <span style="font-size: 2em;">🇨🇷</span>
+                        <div>Costa Rica</div>
+                    </div>
+                    <div class="map-country collected" onclick="openModal({name: 'Czechia', flag: '🇨🇿'})">
+                        <span style="font-size: 2em;">🇨🇿</span>
+                        <div>Czechia</div>
+                    </div>
+                    <div class="map-country collected" onclick="openModal({name: 'Denmark', flag: '🇩🇰'})">
+                        <span style="font-size: 2em;">🇩🇰</span>
+                        <div>Denmark</div>
+                    </div>
+                    <div class="map-country collected" onclick="openModal({name: 'Dominican Republic', flag: '🇩🇴'})">
+                        <span style="font-size: 2em;">🇩🇴</span>
+                        <div>Dominican Republic</div>
+                    </div>
+                    <div class="map-country collected" onclick="openModal({name: 'United Kingdom', flag: '🇬🇧'})">
+                        <span style="font-size: 2em;">🇬🇧</span>
+                        <div>England (UK)</div>
+                    </div>
+                    <div class="map-country collected" onclick="openModal({name: 'Grenada', flag: '🇬🇩'})">
+                        <span style="font-size: 2em;">🇬🇩</span>
+                        <div>Grenada</div>
+                    </div>
+                    <div class="map-country collected" onclick="openModal({name: 'Hungary', flag: '🇭🇺'})">
+                        <span style="font-size: 2em;">🇭🇺</span>
+                        <div>Hungary</div>
+                    </div>
+                    <div class="map-country collected" onclick="openModal({name: 'Jamaica', flag: '🇯🇲'})">
+                        <span style="font-size: 2em;">🇯🇲</span>
+                        <div>Jamaica</div>
+                    </div>
+                    <div class="map-country collected" onclick="openModal({name: 'Netherlands', flag: '🇳🇱'})">
+                        <span style="font-size: 2em;">🇳🇱</span>
+                        <div>Netherlands</div>
+                    </div>
+                    <div class="map-country collected" onclick="openModal({name: 'Panama', flag: '🇵🇦'})">
+                        <span style="font-size: 2em;">🇵🇦</span>
+                        <div>Panama</div>
+                    </div>
+                    <div class="map-country collected" onclick="openModal({name: 'Paraguay', flag: '🇵🇾'})">
+                        <span style="font-size: 2em;">🇵🇾</span>
+                        <div>Paraguay</div>
+                    </div>
+                    <div class="map-country collected" onclick="openModal({name: 'Peru', flag: '🇵🇪'})">
+                        <span style="font-size: 2em;">🇵🇪</span>
+                        <div>Peru</div>
+                    </div>
+                    <div class="map-country collected" onclick="openModal({name: 'Portugal', flag: '🇵🇹'})">
+                        <span style="font-size: 2em;">🇵🇹</span>
+                        <div>Portugal</div>
+                    </div>
+                    <div class="map-country collected" onclick="openModal({name: 'Slovakia', flag: '🇸🇰'})">
+                        <span style="font-size: 2em;">🇸🇰</span>
+                        <div>Slovakia</div>
+                    </div>
+                    <div class="map-country collected" onclick="openModal({name: 'Saint Lucia', flag: '🇱🇨'})">
+                        <span style="font-size: 2em;">🇱🇨</span>
+                        <div>Saint Lucia</div>
+                    </div>
+                    <div class="map-country collected" onclick="openModal({name: 'Sweden', flag: '🇸🇪'})">
+                        <span style="font-size: 2em;">🇸🇪</span>
+                        <div>Sweden</div>
+                    </div>
+                    <div class="map-country collected" onclick="openModal({name: 'Uruguay', flag: '🇺🇾'})">
+                        <span style="font-size: 2em;">🇺🇾</span>
+                        <div>Uruguay</div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- About Me Page -->
@@ -673,6 +818,9 @@
             if (pageName === 'home') {
                 document.getElementById('homePage').classList.add('active');
                 document.querySelector('a[onclick*="home"]').classList.add('active');
+            } else if (pageName === 'map') {
+                document.getElementById('mapPage').classList.add('active');
+                document.querySelector('a[onclick*="map"]').classList.add('active');
             } else if (pageName === 'about') {
                 document.getElementById('aboutPage').classList.add('active');
                 document.querySelector('a[onclick*="about"]').classList.add('active');
