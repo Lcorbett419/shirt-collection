@@ -260,10 +260,12 @@
             margin: 5% auto;
             padding: 30px;
             width: 90%;
-            max-width: 800px;
+            max-width: 900px;
             background: white;
             border-radius: 20px;
             animation: slideIn 0.3s;
+            max-height: 85vh;
+            overflow-y: auto;
         }
 
         @keyframes slideIn {
@@ -305,6 +307,37 @@
             font-size: 1.5em;
             text-align: center;
             padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .shirt-description {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .shirt-description h3 {
+            color: #1e3c72;
+            margin-bottom: 10px;
+            font-size: 1.3em;
+        }
+
+        .shirt-description p {
+            color: #555;
+            line-height: 1.6;
+            font-size: 1em;
+        }
+
+        .shirt-description textarea {
+            width: 100%;
+            min-height: 100px;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 1em;
+            resize: vertical;
         }
 
         /* Page Content Sections */
@@ -399,28 +432,6 @@
         }
 
         /* Map tile styling */
-        .map-tile {
-            background: #e9ecef;
-            padding: 15px;
-            border-radius: 10px;
-            text-align: center;
-            font-weight: 600;
-            font-size: 0.95em;
-            transition: all 0.3s;
-            border: 2px solid #dee2e6;
-        }
-
-        .map-tile.collected {
-            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
-            color: white;
-            cursor: pointer;
-            border-color: #28a745;
-        }
-
-        .map-tile.collected:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(40, 167, 69, 0.3);
-        }
     </style>
 </head>
 <body>
@@ -431,7 +442,6 @@
         </button>
         <div class="dropdown-content" id="dropdownMenu">
             <a href="#" class="active" onclick="showPage('home')">🏠 Home</a>
-            <a href="#" onclick="showPage('map')">🗺️ My Map</a>
             <a href="#" onclick="showPage('about')">👤 About Me</a>
             <a href="#" onclick="showPage('contact')">✉️ Get in Contact</a>
         </div>
@@ -778,34 +788,112 @@
             });
         }
 
-        // Countries with photos
+        // Countries with photos and descriptions
         const countriesWithPhotos = {
-            'Antigua and Barbuda': 'antiguaandbarbuda.jpeg',
-            'Argentina': 'argentina.jpeg',
-            'Austria': 'austria.jpeg',
-            'Belgium': 'belgium.jpeg',
-            'Bolivia': 'bolivia.jpeg',
-            'Brazil': 'brazil.jpeg',
-            'Canada': 'canada.jpeg',
-            'Chile': 'chile.jpeg',
-            'Colombia': 'colombia.jpeg',
-            'Costa Rica': 'costarica.jpeg',
-            'Czechia': 'czechia.jpeg',
-            'Denmark': 'denmark.jpeg',
-            'Dominican Republic': 'dominicanrepublic.jpeg',
-            'United Kingdom': 'unitedkingdom.jpeg',
-            'Grenada': 'grenada.jpeg',
-            'Hungary': 'hungary.jpeg',
-            'Jamaica': 'jamaica.jpeg',
-            'Netherlands': 'netherlands.jpeg',
-            'Panama': 'panama.jpeg',
-            'Paraguay': 'paraguay.jpeg',
-            'Peru': 'peru.jpeg',
-            'Portugal': 'portugal.jpeg',
-            'Slovakia': 'slovakia.jpeg',
-            'Saint Lucia': 'saintlucia.jpeg',
-            'Sweden': 'sweden.jpeg',
-            'Uruguay': 'uruguay.jpeg'
+            'Antigua and Barbuda': { 
+                photo: 'antiguaandbarbuda.jpeg',
+                description: 'Add your story here - where you got this shirt, what the trip was like, memorable moments...'
+            },
+            'Argentina': { 
+                photo: 'argentina.jpeg',
+                description: 'Add your story here - where you got this shirt, what the trip was like, memorable moments...'
+            },
+            'Austria': { 
+                photo: 'austria.jpeg',
+                description: 'Add your story here - where you got this shirt, what the trip was like, memorable moments...'
+            },
+            'Belgium': { 
+                photo: 'belgium.jpeg',
+                description: 'Add your story here - where you got this shirt, what the trip was like, memorable moments...'
+            },
+            'Bolivia': { 
+                photo: 'bolivia.jpeg',
+                description: 'Add your story here - where you got this shirt, what the trip was like, memorable moments...'
+            },
+            'Brazil': { 
+                photo: 'brazil.jpeg',
+                description: 'Add your story here - where you got this shirt, what the trip was like, memorable moments...'
+            },
+            'Canada': { 
+                photo: 'canada.jpeg',
+                description: 'Add your story here - where you got this shirt, what the trip was like, memorable moments...'
+            },
+            'Chile': { 
+                photo: 'chile.jpeg',
+                description: 'Add your story here - where you got this shirt, what the trip was like, memorable moments...'
+            },
+            'Colombia': { 
+                photo: 'colombia.jpeg',
+                description: 'Add your story here - where you got this shirt, what the trip was like, memorable moments...'
+            },
+            'Costa Rica': { 
+                photo: 'costarica.jpeg',
+                description: 'Add your story here - where you got this shirt, what the trip was like, memorable moments...'
+            },
+            'Czechia': { 
+                photo: 'czechia.jpeg',
+                description: 'Add your story here - where you got this shirt, what the trip was like, memorable moments...'
+            },
+            'Denmark': { 
+                photo: 'denmark.jpeg',
+                description: 'Add your story here - where you got this shirt, what the trip was like, memorable moments...'
+            },
+            'Dominican Republic': { 
+                photo: 'dominicanrepublic.jpeg',
+                description: 'Add your story here - where you got this shirt, what the trip was like, memorable moments...'
+            },
+            'United Kingdom': { 
+                photo: 'unitedkingdom.jpeg',
+                description: 'Add your story here - where you got this shirt, what the trip was like, memorable moments...'
+            },
+            'Grenada': { 
+                photo: 'grenada.jpeg',
+                description: 'Add your story here - where you got this shirt, what the trip was like, memorable moments...'
+            },
+            'Hungary': { 
+                photo: 'hungary.jpeg',
+                description: 'Add your story here - where you got this shirt, what the trip was like, memorable moments...'
+            },
+            'Jamaica': { 
+                photo: 'jamaica.jpeg',
+                description: 'Add your story here - where you got this shirt, what the trip was like, memorable moments...'
+            },
+            'Netherlands': { 
+                photo: 'netherlands.jpeg',
+                description: 'Add your story here - where you got this shirt, what the trip was like, memorable moments...'
+            },
+            'Panama': { 
+                photo: 'panama.jpeg',
+                description: 'Add your story here - where you got this shirt, what the trip was like, memorable moments...'
+            },
+            'Paraguay': { 
+                photo: 'paraguay.jpeg',
+                description: 'Add your story here - where you got this shirt, what the trip was like, memorable moments...'
+            },
+            'Peru': { 
+                photo: 'peru.jpeg',
+                description: 'Add your story here - where you got this shirt, what the trip was like, memorable moments...'
+            },
+            'Portugal': { 
+                photo: 'portugal.jpeg',
+                description: 'Add your story here - where you got this shirt, what the trip was like, memorable moments...'
+            },
+            'Slovakia': { 
+                photo: 'slovakia.jpeg',
+                description: 'Add your story here - where you got this shirt, what the trip was like, memorable moments...'
+            },
+            'Saint Lucia': { 
+                photo: 'saintlucia.jpeg',
+                description: 'Add your story here - where you got this shirt, what the trip was like, memorable moments...'
+            },
+            'Sweden': { 
+                photo: 'sweden.jpeg',
+                description: 'Add your story here - where you got this shirt, what the trip was like, memorable moments...'
+            },
+            'Uruguay': { 
+                photo: 'uruguay.jpeg',
+                description: 'Add your story here - where you got this shirt, what the trip was like, memorable moments...'
+            }
         };
 
         function openModal(country) {
@@ -813,8 +901,16 @@
             
             // Check if we have a photo for this country
             const shirtImage = document.getElementById('shirtImage');
-            if (countriesWithPhotos[country.name]) {
-                shirtImage.innerHTML = `<img src="${countriesWithPhotos[country.name]}" alt="${country.name} National Team Shirt" style="width: 100%; height: 100%; object-fit: contain; border-radius: 15px;">`;
+            const countryData = countriesWithPhotos[country.name];
+            
+            if (countryData) {
+                shirtImage.innerHTML = `
+                    <img src="${countryData.photo}" alt="${country.name} National Team Shirt" style="width: 100%; height: 100%; object-fit: contain; border-radius: 15px;">
+                    <div class="shirt-description">
+                        <h3>About This Shirt</h3>
+                        <p>${countryData.description}</p>
+                    </div>
+                `;
             } else {
                 shirtImage.innerHTML = `📸 Coming soon!<br>
                     <small style="font-size: 0.7em; margin-top: 10px; display: block;">
@@ -859,9 +955,6 @@
             if (pageName === 'home') {
                 document.getElementById('homePage').classList.add('active');
                 document.querySelector('a[onclick*="home"]').classList.add('active');
-            } else if (pageName === 'map') {
-                document.getElementById('mapPage').classList.add('active');
-                document.querySelector('a[onclick*="map"]').classList.add('active');
             } else if (pageName === 'about') {
                 document.getElementById('aboutPage').classList.add('active');
                 document.querySelector('a[onclick*="about"]').classList.add('active');
