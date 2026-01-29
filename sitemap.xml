@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://lukes197nations.co.uk/</loc>
+    <lastmod>2025-01-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+</urlset>
+```
+
+5. Click "Commit changes"
+
+## Step 3: Create a robots.txt File
+
+1. In GitHub, click "Add file" → "Create new file"
+2. Name it: `robots.txt`
+3. Paste this:
+```
+User-agent: *
+Allow: /
+Sitemap: https://lukes197nations.co.uk/sitemap.xml
