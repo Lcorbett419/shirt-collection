@@ -329,10 +329,12 @@
         }
 
         .flag {
-            font-size: 4em;
+            width: 100%;
+            height: 80px;
             margin-bottom: 10px;
             display: block;
-            line-height: 1;
+            object-fit: contain;
+            border-radius: 8px;
         }
 
         .country-name {
@@ -646,72 +648,72 @@
 
     <script>
         const countries = [
-            {name: "Afghanistan", flag: "🇦🇫"}, {name: "Albania", flag: "🇦🇱"}, {name: "Algeria", flag: "🇩🇿"},
-            {name: "Andorra", flag: "🇦🇩"}, {name: "Angola", flag: "🇦🇴"}, {name: "Antigua and Barbuda", flag: "🇦🇬"},
-            {name: "Argentina", flag: "🇦🇷"}, {name: "Armenia", flag: "🇦🇲"}, {name: "Australia", flag: "🇦🇺"},
-            {name: "Austria", flag: "🇦🇹"}, {name: "Azerbaijan", flag: "🇦🇿"}, {name: "Bahamas", flag: "🇧🇸"},
-            {name: "Bahrain", flag: "🇧🇭"}, {name: "Bangladesh", flag: "🇧🇩"}, {name: "Barbados", flag: "🇧🇧"},
-            {name: "Belarus", flag: "🇧🇾"}, {name: "Belgium", flag: "🇧🇪"}, {name: "Belize", flag: "🇧🇿"},
-            {name: "Benin", flag: "🇧🇯"}, {name: "Bhutan", flag: "🇧🇹"}, {name: "Bolivia", flag: "🇧🇴"},
-            {name: "Bosnia and Herzegovina", flag: "🇧🇦"}, {name: "Botswana", flag: "🇧🇼"}, {name: "Brazil", flag: "🇧🇷"},
-            {name: "Brunei", flag: "🇧🇳"}, {name: "Bulgaria", flag: "🇧🇬"}, {name: "Burkina Faso", flag: "🇧🇫"},
-            {name: "Burundi", flag: "🇧🇮"}, {name: "Cabo Verde", flag: "🇨🇻"}, {name: "Cambodia", flag: "🇰🇭"},
-            {name: "Cameroon", flag: "🇨🇲"}, {name: "Canada", flag: "🇨🇦"}, {name: "Central African Republic", flag: "🇨🇫"},
-            {name: "Chad", flag: "🇹🇩"}, {name: "Chile", flag: "🇨🇱"}, {name: "China", flag: "🇨🇳"},
-            {name: "Colombia", flag: "🇨🇴"}, {name: "Comoros", flag: "🇰🇲"}, {name: "Congo (Congo-Brazzaville)", flag: "🇨🇬"},
-            {name: "Costa Rica", flag: "🇨🇷"}, {name: "Côte d'Ivoire", flag: "🇨🇮"}, {name: "Croatia", flag: "🇭🇷"}, {name: "Cuba", flag: "🇨🇺"},
-            {name: "Cyprus", flag: "🇨🇾"}, {name: "Czechia", flag: "🇨🇿"}, {name: "Democratic Republic of the Congo", flag: "🇨🇩"},
-            {name: "Denmark", flag: "🇩🇰"}, {name: "Djibouti", flag: "🇩🇯"}, {name: "Dominica", flag: "🇩🇲"},
-            {name: "Dominican Republic", flag: "🇩🇴"}, {name: "Ecuador", flag: "🇪🇨"}, {name: "Egypt", flag: "🇪🇬"},
-            {name: "El Salvador", flag: "🇸🇻"}, {name: "Equatorial Guinea", flag: "🇬🇶"}, {name: "Eritrea", flag: "🇪🇷"},
-            {name: "Estonia", flag: "🇪🇪"}, {name: "Eswatini", flag: "🇸🇿"}, {name: "Ethiopia", flag: "🇪🇹"},
-            {name: "Fiji", flag: "🇫🇯"}, {name: "Finland", flag: "🇫🇮"}, {name: "France", flag: "🇫🇷"},
-            {name: "Gabon", flag: "🇬🇦"}, {name: "Gambia", flag: "🇬🇲"}, {name: "Georgia", flag: "🇬🇪"},
-            {name: "Germany", flag: "🇩🇪"}, {name: "Ghana", flag: "🇬🇭"}, {name: "Greece", flag: "🇬🇷"},
-            {name: "Grenada", flag: "🇬🇩"}, {name: "Guatemala", flag: "🇬🇹"}, {name: "Guinea", flag: "🇬🇳"},
-            {name: "Guinea-Bissau", flag: "🇬🇼"}, {name: "Guyana", flag: "🇬🇾"}, {name: "Haiti", flag: "🇭🇹"},
-            {name: "Honduras", flag: "🇭🇳"}, {name: "Hungary", flag: "🇭🇺"}, {name: "Iceland", flag: "🇮🇸"},
-            {name: "India", flag: "🇮🇳"}, {name: "Indonesia", flag: "🇮🇩"}, {name: "Iran", flag: "🇮🇷"},
-            {name: "Iraq", flag: "🇮🇶"}, {name: "Ireland", flag: "🇮🇪"}, {name: "Israel", flag: "🇮🇱"},
-            {name: "Italy", flag: "🇮🇹"}, {name: "Jamaica", flag: "🇯🇲"}, {name: "Japan", flag: "🇯🇵"},
-            {name: "Jordan", flag: "🇯🇴"}, {name: "Kazakhstan", flag: "🇰🇿"}, {name: "Kenya", flag: "🇰🇪"},
-            {name: "Kiribati", flag: "🇰🇮"}, {name: "Kosovo", flag: "🇽🇰"}, {name: "Kuwait", flag: "🇰🇼"},
-            {name: "Kyrgyzstan", flag: "🇰🇬"}, {name: "Laos", flag: "🇱🇦"}, {name: "Latvia", flag: "🇱🇻"},
-            {name: "Lebanon", flag: "🇱🇧"}, {name: "Lesotho", flag: "🇱🇸"}, {name: "Liberia", flag: "🇱🇷"},
-            {name: "Libya", flag: "🇱🇾"}, {name: "Liechtenstein", flag: "🇱🇮"}, {name: "Lithuania", flag: "🇱🇹"},
-            {name: "Luxembourg", flag: "🇱🇺"}, {name: "Madagascar", flag: "🇲🇬"}, {name: "Malawi", flag: "🇲🇼"},
-            {name: "Malaysia", flag: "🇲🇾"}, {name: "Maldives", flag: "🇲🇻"}, {name: "Mali", flag: "🇲🇱"},
-            {name: "Malta", flag: "🇲🇹"}, {name: "Marshall Islands", flag: "🇲🇭"}, {name: "Mauritania", flag: "🇲🇷"},
-            {name: "Mauritius", flag: "🇲🇺"}, {name: "Mexico", flag: "🇲🇽"}, {name: "Micronesia", flag: "🇫🇲"},
-            {name: "Moldova", flag: "🇲🇩"}, {name: "Monaco", flag: "🇲🇨"}, {name: "Mongolia", flag: "🇲🇳"},
-            {name: "Montenegro", flag: "🇲🇪"}, {name: "Morocco", flag: "🇲🇦"}, {name: "Mozambique", flag: "🇲🇿"},
-            {name: "Myanmar", flag: "🇲🇲"}, {name: "Namibia", flag: "🇳🇦"}, {name: "Nauru", flag: "🇳🇷"},
-            {name: "Nepal", flag: "🇳🇵"}, {name: "Netherlands", flag: "🇳🇱"}, {name: "New Zealand", flag: "🇳🇿"},
-            {name: "Nicaragua", flag: "🇳🇮"}, {name: "Niger", flag: "🇳🇪"}, {name: "Nigeria", flag: "🇳🇬"},
-            {name: "North Korea", flag: "🇰🇵"}, {name: "North Macedonia", flag: "🇲🇰"}, {name: "Norway", flag: "🇳🇴"},
-            {name: "Oman", flag: "🇴🇲"}, {name: "Pakistan", flag: "🇵🇰"}, {name: "Palau", flag: "🇵🇼"},
-            {name: "Palestine", flag: "🇵🇸"}, {name: "Panama", flag: "🇵🇦"}, {name: "Papua New Guinea", flag: "🇵🇬"},
-            {name: "Paraguay", flag: "🇵🇾"}, {name: "Peru", flag: "🇵🇪"}, {name: "Philippines", flag: "🇵🇭"},
-            {name: "Poland", flag: "🇵🇱"}, {name: "Portugal", flag: "🇵🇹"}, {name: "Qatar", flag: "🇶🇦"},
-            {name: "Romania", flag: "🇷🇴"}, {name: "Russia", flag: "🇷🇺"}, {name: "Rwanda", flag: "🇷🇼"},
-            {name: "Saint Kitts and Nevis", flag: "🇰🇳"}, {name: "Saint Lucia", flag: "🇱🇨"}, {name: "Saint Vincent and the Grenadines", flag: "🇻🇨"},
-            {name: "Samoa", flag: "🇼🇸"}, {name: "San Marino", flag: "🇸🇲"}, {name: "Sao Tome and Principe", flag: "🇸🇹"},
-            {name: "Saudi Arabia", flag: "🇸🇦"}, {name: "Senegal", flag: "🇸🇳"}, {name: "Serbia", flag: "🇷🇸"},
-            {name: "Seychelles", flag: "🇸🇨"}, {name: "Sierra Leone", flag: "🇸🇱"}, {name: "Singapore", flag: "🇸🇬"},
-            {name: "Slovakia", flag: "🇸🇰"}, {name: "Slovenia", flag: "🇸🇮"}, {name: "Solomon Islands", flag: "🇸🇧"},
-            {name: "Somalia", flag: "🇸🇴"}, {name: "South Africa", flag: "🇿🇦"}, {name: "South Korea", flag: "🇰🇷"},
-            {name: "South Sudan", flag: "🇸🇸"}, {name: "Spain", flag: "🇪🇸"}, {name: "Sri Lanka", flag: "🇱🇰"},
-            {name: "Sudan", flag: "🇸🇩"}, {name: "Suriname", flag: "🇸🇷"}, {name: "Sweden", flag: "🇸🇪"},
-            {name: "Switzerland", flag: "🇨🇭"}, {name: "Syria", flag: "🇸🇾"}, {name: "Taiwan", flag: "🇹🇼"},
-            {name: "Tajikistan", flag: "🇹🇯"}, {name: "Tanzania", flag: "🇹🇿"}, {name: "Thailand", flag: "🇹🇭"},
-            {name: "Timor-Leste", flag: "🇹🇱"}, {name: "Togo", flag: "🇹🇬"}, {name: "Tonga", flag: "🇹🇴"},
-            {name: "Trinidad and Tobago", flag: "🇹🇹"}, {name: "Tunisia", flag: "🇹🇳"}, {name: "Turkey", flag: "🇹🇷"},
-            {name: "Turkmenistan", flag: "🇹🇲"}, {name: "Tuvalu", flag: "🇹🇻"}, {name: "Uganda", flag: "🇺🇬"},
-            {name: "Ukraine", flag: "🇺🇦"}, {name: "United Arab Emirates", flag: "🇦🇪"}, {name: "United Kingdom", flag: "🇬🇧"},
-            {name: "United States", flag: "🇺🇸"}, {name: "Uruguay", flag: "🇺🇾"}, {name: "Uzbekistan", flag: "🇺🇿"},
-            {name: "Vanuatu", flag: "🇻🇺"}, {name: "Vatican City", flag: "🇻🇦"}, {name: "Venezuela", flag: "🇻🇪"},
-            {name: "Vietnam", flag: "🇻🇳"}, {name: "Yemen", flag: "🇾🇪"}, {name: "Zambia", flag: "🇿🇲"},
-            {name: "Zimbabwe", flag: "🇿🇼"}
+            {name: "Afghanistan", flag: "afghanistanflag.png"}, {name: "Albania", flag: "albaniaflag.png"}, {name: "Algeria", flag: "algeriaflag.png"},
+            {name: "Andorra", flag: "andorraflag.png"}, {name: "Angola", flag: "angolaflag.png"}, {name: "Antigua and Barbuda", flag: "antiguaandbarbudaflag.png"},
+            {name: "Argentina", flag: "argentinaflag.png"}, {name: "Armenia", flag: "armeniaflag.png"}, {name: "Australia", flag: "australiaflag.png"},
+            {name: "Austria", flag: "austriaflag.png"}, {name: "Azerbaijan", flag: "azerbaijanflag.png"}, {name: "Bahamas", flag: "bahamasflag.png"},
+            {name: "Bahrain", flag: "bahrainflag.png"}, {name: "Bangladesh", flag: "bangladeshflag.png"}, {name: "Barbados", flag: "barbadosflag.png"},
+            {name: "Belarus", flag: "belarusflag.png"}, {name: "Belgium", flag: "belgiumflag.png"}, {name: "Belize", flag: "belizeflag.png"},
+            {name: "Benin", flag: "beninflag.png"}, {name: "Bhutan", flag: "bhutanflag.png"}, {name: "Bolivia", flag: "boliviaflag.png"},
+            {name: "Bosnia and Herzegovina", flag: "bosniaflag.png"}, {name: "Botswana", flag: "botswanaflag.png"}, {name: "Brazil", flag: "brazilflag.png"},
+            {name: "Brunei", flag: "bruneiflag.png"}, {name: "Bulgaria", flag: "bulgariaflag.png"}, {name: "Burkina Faso", flag: "burkinafasoflag.png"},
+            {name: "Burundi", flag: "burundiflag.png"}, {name: "Cabo Verde", flag: "caboverdeflag.png"}, {name: "Cambodia", flag: "cambodiaflag.png"},
+            {name: "Cameroon", flag: "cameroonflag.png"}, {name: "Canada", flag: "canadaflag.png"}, {name: "Central African Republic", flag: "carflag.png"},
+            {name: "Chad", flag: "chadflag.png"}, {name: "Chile", flag: "chileflag.png"}, {name: "China", flag: "chinaflag.png"},
+            {name: "Colombia", flag: "colombiaflag.png"}, {name: "Comoros", flag: "comorosflag.png"}, {name: "Congo (Congo-Brazzaville)", flag: "congoflag.png"},
+            {name: "Costa Rica", flag: "costaricaflag.png"}, {name: "Côte d'Ivoire", flag: "icflag.png"}, {name: "Croatia", flag: "croatiaflag.png"}, {name: "Cuba", flag: "cubaflag.png"},
+            {name: "Cyprus", flag: "cyprusflag.png"}, {name: "Czechia", flag: "czechiaflag.png"}, {name: "Democratic Republic of the Congo", flag: "drcflag.png"},
+            {name: "Denmark", flag: "denmarkflag.png"}, {name: "Djibouti", flag: "djiboutiflag.png"}, {name: "Dominica", flag: "dominicaflag.png"},
+            {name: "Dominican Republic", flag: "dominicanrepublicflag.png"}, {name: "Ecuador", flag: "ecuadorflag.png"}, {name: "Egypt", flag: "egyptflag.png"},
+            {name: "El Salvador", flag: "elsalvadorflag.png"}, {name: "Equatorial Guinea", flag: "equatorialguineaflag.png"}, {name: "Eritrea", flag: "eritreaflag.png"},
+            {name: "Estonia", flag: "estoniaflag.png"}, {name: "Eswatini", flag: "eswatiniflag.png"}, {name: "Ethiopia", flag: "ethiopiaflag.png"},
+            {name: "Fiji", flag: "fijiflag.png"}, {name: "Finland", flag: "finlandflag.png"}, {name: "France", flag: "franceflag.png"},
+            {name: "Gabon", flag: "gabonflag.png"}, {name: "Gambia", flag: "gambiaflag.png"}, {name: "Georgia", flag: "georgiaflag.png"},
+            {name: "Germany", flag: "germanyflag.png"}, {name: "Ghana", flag: "ghanaflag.png"}, {name: "Greece", flag: "greeceflag.png"},
+            {name: "Grenada", flag: "grenadaflag.png"}, {name: "Guatemala", flag: "guatemalaflag.png"}, {name: "Guinea", flag: "guineaflag.png"},
+            {name: "Guinea-Bissau", flag: "guineabissauflag.png"}, {name: "Guyana", flag: "guyanaflag.png"}, {name: "Haiti", flag: "haitiflag.png"},
+            {name: "Honduras", flag: "hondurasflag.png"}, {name: "Hungary", flag: "hungaryflag.png"}, {name: "Iceland", flag: "icelandflag.png"},
+            {name: "India", flag: "indiaflag.png"}, {name: "Indonesia", flag: "indonesiaflag.png"}, {name: "Iran", flag: "iranflag.png"},
+            {name: "Iraq", flag: "iraqflag.png"}, {name: "Ireland", flag: "irelandflag.png"}, {name: "Israel", flag: "israelflag.png"},
+            {name: "Italy", flag: "italyflag.png"}, {name: "Jamaica", flag: "jamaicaflag.png"}, {name: "Japan", flag: "japanflag.png"},
+            {name: "Jordan", flag: "jordanflag.png"}, {name: "Kazakhstan", flag: "kazakhstanflag.png"}, {name: "Kenya", flag: "kenyaflag.png"},
+            {name: "Kiribati", flag: "kiribatiflag.png"}, {name: "Kosovo", flag: "kosovoflag.png"}, {name: "Kuwait", flag: "kuwaitflag.png"},
+            {name: "Kyrgyzstan", flag: "kyrgyzstanflag.png"}, {name: "Laos", flag: "laosflag.png"}, {name: "Latvia", flag: "latviaflag.png"},
+            {name: "Lebanon", flag: "lebanonflag.png"}, {name: "Lesotho", flag: "lesothoflag.png"}, {name: "Liberia", flag: "liberiaflag.png"},
+            {name: "Libya", flag: "libyaflag.png"}, {name: "Liechtenstein", flag: "liechtensteinflag.png"}, {name: "Lithuania", flag: "lithuaniaflag.png"},
+            {name: "Luxembourg", flag: "luxembourgflag.png"}, {name: "Madagascar", flag: "madagascarflag.png"}, {name: "Malawi", flag: "malawiflag.png"},
+            {name: "Malaysia", flag: "malaysiaflag.png"}, {name: "Maldives", flag: "maldivesflag.png"}, {name: "Mali", flag: "maliflag.png"},
+            {name: "Malta", flag: "maltaflag.png"}, {name: "Marshall Islands", flag: "marshallislandsflag.png"}, {name: "Mauritania", flag: "mauritaniaflag.png"},
+            {name: "Mauritius", flag: "mauritiusflag.png"}, {name: "Mexico", flag: "mexicoflag.png"}, {name: "Micronesia", flag: "micronesiaflag.png"},
+            {name: "Moldova", flag: "moldovaflag.png"}, {name: "Monaco", flag: "monacoflag.png"}, {name: "Mongolia", flag: "mongoliaflag.png"},
+            {name: "Montenegro", flag: "montenegroflag.png"}, {name: "Morocco", flag: "moroccoflag.png"}, {name: "Mozambique", flag: "mozambiqueflag.png"},
+            {name: "Myanmar", flag: "myanmarflag.png"}, {name: "Namibia", flag: "namibiaflag.png"}, {name: "Nauru", flag: "nauruflag.png"},
+            {name: "Nepal", flag: "nepalflag.png"}, {name: "Netherlands", flag: "netherlandsflag.png"}, {name: "New Zealand", flag: "newzealandflag.png"},
+            {name: "Nicaragua", flag: "nicaraguaflag.png"}, {name: "Niger", flag: "nigerflag.png"}, {name: "Nigeria", flag: "nigeriaflag.png"},
+            {name: "North Korea", flag: "northkoreaflag.png"}, {name: "North Macedonia", flag: "northmacedoniaflag.png"}, {name: "Norway", flag: "norwayflag.png"},
+            {name: "Oman", flag: "omanflag.png"}, {name: "Pakistan", flag: "pakistanflag.png"}, {name: "Palau", flag: "palauflag.png"},
+            {name: "Palestine", flag: "palestineflag.png"}, {name: "Panama", flag: "panamaflag.png"}, {name: "Papua New Guinea", flag: "pngflag.png"},
+            {name: "Paraguay", flag: "paraguayflag.png"}, {name: "Peru", flag: "peruflag.png"}, {name: "Philippines", flag: "philippinesflag.png"},
+            {name: "Poland", flag: "polandflag.png"}, {name: "Portugal", flag: "portugalflag.png"}, {name: "Qatar", flag: "qatarflag.png"},
+            {name: "Romania", flag: "romaniaflag.png"}, {name: "Russia", flag: "russiaflag.png"}, {name: "Rwanda", flag: "rwandaflag.png"},
+            {name: "Saint Kitts and Nevis", flag: "saintkittsandnevisflag.png"}, {name: "Saint Lucia", flag: "saintluciaflag.png"}, {name: "Saint Vincent and the Grenadines", flag: "saintvincentflag.png"},
+            {name: "Samoa", flag: "samoaflag.png"}, {name: "San Marino", flag: "sanmarinoflag.png"}, {name: "Sao Tome and Principe", flag: "saotomeflag.png"},
+            {name: "Saudi Arabia", flag: "saudiarabiaflag.png"}, {name: "Senegal", flag: "senegalflag.png"}, {name: "Serbia", flag: "serbiaflag.png"},
+            {name: "Seychelles", flag: "seychellesflag.png"}, {name: "Sierra Leone", flag: "sierraleonflag.png"}, {name: "Singapore", flag: "singaporeflag.png"},
+            {name: "Slovakia", flag: "slovakiaflag.png"}, {name: "Slovenia", flag: "sloveniaflag.png"}, {name: "Solomon Islands", flag: "solomonislandsflag.png"},
+            {name: "Somalia", flag: "somaliaflag.png"}, {name: "South Africa", flag: "southafricaflag.png"}, {name: "South Korea", flag: "southkoreaflag.png"},
+            {name: "South Sudan", flag: "southsudanflag.png"}, {name: "Spain", flag: "spainflag.png"}, {name: "Sri Lanka", flag: "srilankaflag.png"},
+            {name: "Sudan", flag: "sudanflag.png"}, {name: "Suriname", flag: "surinameflag.png"}, {name: "Sweden", flag: "swedenflag.png"},
+            {name: "Switzerland", flag: "switzerlandflag.png"}, {name: "Syria", flag: "syriaflag.png"}, {name: "Taiwan", flag: "taiwanflag.png"},
+            {name: "Tajikistan", flag: "tajikistanflag.png"}, {name: "Tanzania", flag: "tanzaniaflag.png"}, {name: "Thailand", flag: "thailandflag.png"},
+            {name: "Timor-Leste", flag: "timorlesteflag.png"}, {name: "Togo", flag: "togoflag.png"}, {name: "Tonga", flag: "tongaflag.png"},
+            {name: "Trinidad and Tobago", flag: "trinidadandtobagoflag.png"}, {name: "Tunisia", flag: "tunisiaflag.png"}, {name: "Turkey", flag: "turkeyflag.png"},
+            {name: "Turkmenistan", flag: "turkmenistanflag.png"}, {name: "Tuvalu", flag: "tuvaluflag.png"}, {name: "Uganda", flag: "ugandaflag.png"},
+            {name: "Ukraine", flag: "ukraineflag.png"}, {name: "United Arab Emirates", flag: "uaeflag.png"}, {name: "United Kingdom", flag: "ukflag.png"},
+            {name: "United States", flag: "usaflag.png"}, {name: "Uruguay", flag: "uruguayflag.png"}, {name: "Uzbekistan", flag: "uzbekistanflag.png"},
+            {name: "Vanuatu", flag: "vanuatuflag.png"}, {name: "Vatican City", flag: "vaticancityflag.png"}, {name: "Venezuela", flag: "venezuelaflag.png"},
+            {name: "Vietnam", flag: "vietnamflag.png"}, {name: "Yemen", flag: "yemenflag.png"}, {name: "Zambia", flag: "zambiaflag.png"},
+            {name: "Zimbabwe", flag: "zimbabweflag.png"}
         ];
 
         // Countries with photos and descriptions
@@ -872,7 +874,7 @@
                 
                 card.innerHTML = `
                     <div class="checkbox">${countriesWithPhotos[country.name] ? '✓' : ''}</div>
-                    <span class="flag">${country.flag}</span>
+                    <img src="flags/${country.flag}" alt="${country.name} flag" class="flag">
                     <div class="country-name">${country.name}</div>
                 `;
                 card.onclick = () => openModal(country);
