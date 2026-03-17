@@ -1018,6 +1018,70 @@
         });
 
         renderCountries();
+
+        // Initialize World Map
+        am5.ready(function() {
+            var root = am5.Root.new("worldMap");
+            root.setThemes([am5themes_Animated.new(root)]);
+
+            var chart = root.container.children.push(am5map.MapChart.new(root, {
+                panX: "rotateX",
+                panY: "rotateY",
+                projection: am5map.geoMercator()
+            }));
+
+            var polygonSeries = chart.series.push(am5map.MapPolygonSeries.new(root, {
+                geoJSON: am5geodata_worldLow
+            }));
+
+            var collectedCountries = {
+                'AG': true, 'AR': true, 'AT': true, 'BE': true, 'BO': true, 'BR': true,
+                'CA': true, 'CL': true, 'CO': true, 'CR': true, 'CZ': true, 'DK': true,
+                'DO': true, 'GB': true, 'GD': true, 'HU': true, 'JM': true, 'NL': true,
+                'PA': true, 'PY': true, 'PE': true, 'PT': true, 'SK': true, 'LC': true,
+                'SE': true, 'UY': true
+            };
+
+            polygonSeries.mapPolygons.template.setAll({
+                tooltipText: "{name}",
+                toggleKey: "active",
+                interactive: true,
+                fill: am5.color(0xe0e0e0),
+                stroke: am5.color(0xffffff),
+                strokeWidth: 1
+            });
+
+            polygonSeries.mapPolygons.template.states.create("hover", {
+                fill: am5.color(0x2a5298)
+            });
+
+            polygonSeries.mapPolygons.template.adapters.add("fill", function(fill, target) {
+                var dataItem = target.dataItem;
+                if (dataItem) {
+                    var id = dataItem.get("id");
+                    if (collectedCountries[id]) {
+                        return am5.color(0x28a745);
+                    }
+                }
+                return fill;
+            });
+
+            polygonSeries.mapPolygons.template.events.on("click", function(ev) {
+                var countryName = ev.target.dataItem.get("name");
+                var country = countries.find(c => {
+                    if (c.name === countryName) return true;
+                    if (countryName === "United States of America" && c.name === "United States") return true;
+                    if (countryName === "Czech Republic" && c.name === "Czechia") return true;
+                    return false;
+                });
+                if (country) {
+                    openModal(country);
+                }
+            });
+
+            chart.set("zoomControl", am5map.ZoomControl.new(root, {}));
+            chart.appear(1000, 100);
+        });
     </script>
 </body>
 </html>
