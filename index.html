@@ -1068,12 +1068,49 @@
 
             polygonSeries.mapPolygons.template.events.on("click", function(ev) {
                 var countryName = ev.target.dataItem.get("name");
-                var country = countries.find(c => {
-                    if (c.name === countryName) return true;
-                    if (countryName === "United States of America" && c.name === "United States") return true;
-                    if (countryName === "Czech Republic" && c.name === "Czechia") return true;
-                    return false;
-                });
+                
+                // Map territories to their parent countries
+                var territoryMap = {
+                    'Greenland': 'Denmark',
+                    'French Guiana': 'France',
+                    'Martinique': 'France',
+                    'Guadeloupe': 'France',
+                    'Reunion': 'France',
+                    'Mayotte': 'France',
+                    'French Polynesia': 'France',
+                    'New Caledonia': 'France',
+                    'Puerto Rico': 'United States',
+                    'U.S. Virgin Islands': 'United States',
+                    'Guam': 'United States',
+                    'American Samoa': 'United States',
+                    'Northern Mariana Islands': 'United States',
+                    'Bermuda': 'United Kingdom',
+                    'Cayman Islands': 'United Kingdom',
+                    'British Virgin Islands': 'United Kingdom',
+                    'Turks and Caicos Islands': 'United Kingdom',
+                    'Falkland Islands': 'United Kingdom',
+                    'Gibraltar': 'United Kingdom',
+                    'Hong Kong': 'China',
+                    'Macau': 'China',
+                    'Aruba': 'Netherlands',
+                    'Curacao': 'Netherlands',
+                    'Sint Maarten': 'Netherlands',
+                    'United States of America': 'United States',
+                    'Czech Republic': 'Czechia'
+                };
+                
+                // Ignore Antarctica
+                if (countryName === 'Antarctica') {
+                    return;
+                }
+                
+                // Check if it's a territory
+                if (territoryMap[countryName]) {
+                    countryName = territoryMap[countryName];
+                }
+                
+                var country = countries.find(c => c.name === countryName);
+                
                 if (country) {
                     openModal(country);
                 }
