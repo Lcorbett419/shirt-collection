@@ -1019,19 +1019,22 @@
 
         renderCountries();
 
-        // Initialize World Map
+       // Initialize World Map
         am5.ready(function() {
             var root = am5.Root.new("worldMap");
             root.setThemes([am5themes_Animated.new(root)]);
 
             var chart = root.container.children.push(am5map.MapChart.new(root, {
-                panX: "rotateX",
-                panY: "rotateY",
-                projection: am5map.geoMercator()
+                panX: "translateX",
+                panY: "translateY",
+                projection: am5map.geoMercator(),
+                homeZoomLevel: 1,
+                homeGeoPoint: { longitude: 0, latitude: 20 }
             }));
 
             var polygonSeries = chart.series.push(am5map.MapPolygonSeries.new(root, {
-                geoJSON: am5geodata_worldLow
+                geoJSON: am5geodata_worldLow,
+                exclude: ["AQ"] // Exclude Antarctica
             }));
 
             var collectedCountries = {
@@ -1042,9 +1045,18 @@
                 'SE': true, 'UY': true
             };
 
+            // Territory to parent country mapping
+            var territoryToCountry = {
+                'GL': 'DK', // Greenland -> Denmark
+                'GF': 'FR', 'GP': 'FR', 'MQ': 'FR', 'RE': 'FR', 'YT': 'FR', 'PF': 'FR', 'NC': 'FR', // French territories
+                'PR': 'US', 'VI': 'US', 'GU': 'US', 'AS': 'US', 'MP': 'US', // US territories
+                'BM': 'GB', 'KY': 'GB', 'VG': 'GB', 'TC': 'GB', 'FK': 'GB', 'GI': 'GB', // UK territories
+                'HK': 'CN', 'MO': 'CN', // China territories
+                'AW': 'NL', 'CW': 'NL', 'SX': 'NL' // Netherlands territories
+            };
+
             polygonSeries.mapPolygons.template.setAll({
                 tooltipText: "{name}",
-                toggleKey: "active",
                 interactive: true,
                 fill: am5.color(0xe0e0e0),
                 stroke: am5.color(0xffffff),
@@ -1055,10 +1067,17 @@
                 fill: am5.color(0x2a5298)
             });
 
+            // Color collected countries and their territories green
             polygonSeries.mapPolygons.template.adapters.add("fill", function(fill, target) {
                 var dataItem = target.dataItem;
                 if (dataItem) {
                     var id = dataItem.get("id");
+                    
+                    // Check if territory belongs to collected country
+                    if (territoryToCountry[id]) {
+                        id = territoryToCountry[id];
+                    }
+                    
                     if (collectedCountries[id]) {
                         return am5.color(0x28a745);
                     }
@@ -1066,47 +1085,42 @@
                 return fill;
             });
 
+            // Name mapping for display
+            var nameMap = {
+                'United States of America': 'United States',
+                'Czech Republic': 'Czechia',
+                'Greenland': 'Denmark',
+                'French Guiana': 'France',
+                'Guadeloupe': 'France',
+                'Martinique': 'France',
+                'Réunion': 'France',
+                'Mayotte': 'France',
+                'French Polynesia': 'France',
+                'New Caledonia': 'France',
+                'Puerto Rico': 'United States',
+                'United States Virgin Islands': 'United States',
+                'Guam': 'United States',
+                'American Samoa': 'United States',
+                'Northern Mariana Islands': 'United States',
+                'Bermuda': 'United Kingdom',
+                'Cayman Islands': 'United Kingdom',
+                'British Virgin Islands': 'United Kingdom',
+                'Turks and Caicos Islands': 'United Kingdom',
+                'Falkland Islands': 'United Kingdom',
+                'Gibraltar': 'United Kingdom',
+                'Hong Kong': 'China',
+                'Macau': 'China',
+                'Aruba': 'Netherlands',
+                'Curaçao': 'Netherlands',
+                'Sint Maarten': 'Netherlands'
+            };
+
             polygonSeries.mapPolygons.template.events.on("click", function(ev) {
                 var countryName = ev.target.dataItem.get("name");
                 
-                // Map territories to their parent countries
-                var territoryMap = {
-                    'Greenland': 'Denmark',
-                    'French Guiana': 'France',
-                    'Martinique': 'France',
-                    'Guadeloupe': 'France',
-                    'Reunion': 'France',
-                    'Mayotte': 'France',
-                    'French Polynesia': 'France',
-                    'New Caledonia': 'France',
-                    'Puerto Rico': 'United States',
-                    'U.S. Virgin Islands': 'United States',
-                    'Guam': 'United States',
-                    'American Samoa': 'United States',
-                    'Northern Mariana Islands': 'United States',
-                    'Bermuda': 'United Kingdom',
-                    'Cayman Islands': 'United Kingdom',
-                    'British Virgin Islands': 'United Kingdom',
-                    'Turks and Caicos Islands': 'United Kingdom',
-                    'Falkland Islands': 'United Kingdom',
-                    'Gibraltar': 'United Kingdom',
-                    'Hong Kong': 'China',
-                    'Macau': 'China',
-                    'Aruba': 'Netherlands',
-                    'Curacao': 'Netherlands',
-                    'Sint Maarten': 'Netherlands',
-                    'United States of America': 'United States',
-                    'Czech Republic': 'Czechia'
-                };
-                
-                // Ignore Antarctica
-                if (countryName === 'Antarctica') {
-                    return;
-                }
-                
-                // Check if it's a territory
-                if (territoryMap[countryName]) {
-                    countryName = territoryMap[countryName];
+                // Map territories to parent countries
+                if (nameMap[countryName]) {
+                    countryName = nameMap[countryName];
                 }
                 
                 var country = countries.find(c => c.name === countryName);
