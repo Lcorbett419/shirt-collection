@@ -1115,7 +1115,26 @@
                 'Sint Maarten': 'Netherlands'
             };
 
+            var isDragging = false;
+            var dragStartTime = 0;
+
+            chart.events.on("pointerdown", function() {
+                isDragging = false;
+                dragStartTime = Date.now();
+            });
+
+            chart.events.on("globalpointermove", function() {
+                if (Date.now() - dragStartTime > 100) {
+                    isDragging = true;
+                }
+            });
+
             polygonSeries.mapPolygons.template.events.on("click", function(ev) {
+                // Don't open modal if user was dragging
+                if (isDragging) {
+                    return;
+                }
+
                 var countryName = ev.target.dataItem.get("name");
                 
                 // Map territories to parent countries
