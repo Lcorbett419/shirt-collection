@@ -1044,11 +1044,10 @@
             root.setThemes([am5themes_Animated.new(root)]);
 
             var chart = root.container.children.push(am5map.MapChart.new(root, {
-                panX: "translateX",
-                panY: "translateY",
                 projection: am5map.geoMercator(),
-                maxPanOut: 0.3,
-                centerMapOnZoomOut: false
+                panX: true,
+                panY: true,
+                wheelY: "zoom"
             }));
 
             var polygonSeries = chart.series.push(am5map.MapPolygonSeries.new(root, {
