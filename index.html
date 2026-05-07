@@ -1047,8 +1047,8 @@
                 panX: "translateX",
                 panY: "translateY",
                 projection: am5map.geoMercator(),
-                homeZoomLevel: 1,
-                homeGeoPoint: { longitude: 0, latitude: 20 }
+                maxPanOut: 0.3,
+                centerMapOnZoomOut: false
             }));
 
             var polygonSeries = chart.series.push(am5map.MapPolygonSeries.new(root, {
