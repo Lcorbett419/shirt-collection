@@ -1074,7 +1074,7 @@
             };
 
             polygonSeries.mapPolygons.template.setAll({
-                tooltipText: "",
+                tooltipText: "{name}",
                 interactive: true,
                 fill: am5.color(0xe0e0e0),
                 stroke: am5.color(0xffffff),
@@ -1086,10 +1086,6 @@
                 fill: am5.color(0x2a5298)
             });
 
-            polygonSeries.mapPolygons.template.set("tooltipText", function(target) {
-                var name = target.dataItem.dataContext.name;
-                return nameMap[name] || name;
-            });
 
             // Color collected countries and their territories green
             polygonSeries.mapPolygons.template.adapters.add("fill", function(fill, target) {
