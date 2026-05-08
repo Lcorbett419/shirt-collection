@@ -1081,6 +1081,14 @@
                 strokeWidth: 1
             });
 
+            polygonSeries.mapPolygons.template.adapters.add("tooltipText", function(text, target) {
+                var name = target.dataItem.get("name");
+                if (nameMap[name]) {
+                    return nameMap[name];
+                }
+                return name;
+            });
+
             polygonSeries.mapPolygons.template.states.create("hover", {
                 fill: am5.color(0x2a5298)
             });
@@ -1107,6 +1115,7 @@
              var nameMap = {
                 'United States of America': 'United States',
                 'Czech Republic': 'Czechia',
+                'Palestinian Territories': 'Palestine', 
                 //'Greenland': 'Denmark',
                 //'French Guiana': 'France',
                 'Guadeloupe': 'France',
