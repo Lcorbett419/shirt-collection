@@ -1041,15 +1041,30 @@
 
         </script>
     
-    <!-- Load amCharts libraries -->
-    <script src="https://cdn.amcharts.com/lib/5/index.js"></script>
-    <script src="https://cdn.amcharts.com/lib/5/map.js"></script>
-    <script src="https://cdn.amcharts.com/lib/5/geodata/worldLow.js"></script>
-    <script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
+    </script>
     
     <script>
+    // Load amCharts libraries in sequence
+    function loadScript(src, callback) {
+        var script = document.createElement('script');
+        script.src = src;
+        script.onload = callback;
+        document.head.appendChild(script);
+    }
 
-       // Initialize World Map
+    // Load scripts in order
+    loadScript('https://cdn.amcharts.com/lib/5/index.js', function() {
+        loadScript('https://cdn.amcharts.com/lib/5/map.js', function() {
+            loadScript('https://cdn.amcharts.com/lib/5/geodata/worldLow.js', function() {
+                loadScript('https://cdn.amcharts.com/lib/5/themes/Animated.js', function() {
+                    // Now initialize the map
+                    initializeMap();
+                });
+            });
+        });
+    });
+
+    function initializeMap() {
         am5.ready(function() {
             var root = am5.Root.new("worldMap");
             root.setThemes([am5themes_Animated.new(root)]);
@@ -1063,25 +1078,24 @@
 
             var polygonSeries = chart.series.push(am5map.MapPolygonSeries.new(root, {
                 geoJSON: am5geodata_worldLow,
-                exclude: ["AQ"] // Exclude Antarctica
+                exclude: ["AQ"]
             }));
 
             var collectedCountries = {
                 'AG': true, 'AR': true, 'AT': true, 'BE': true, 'BO': true, 'BR': true,
                 'CA': true, 'CL': true, 'CO': true, 'CR': true, 'CZ': true, 'DK': true,
-                'DO': true, 'EE': true, 'GB': true, 'GD': true, 'HU': true, 'IT': true, 'JM': true, 'LV': true, 'NL': true,
-                'PA': true, 'PY': true, 'PE': true, 'PT': true, 'SI': true, 'SK': true, 'LC': true,
-                'SE': true, 'US': true, 'UY': true
+                'DO': true, 'EE': true, 'GB': true, 'GD': true, 'HU': true, 'IT': true,
+                'JM': true, 'LV': true, 'NL': true, 'PA': true, 'PY': true, 'PE': true,
+                'PT': true, 'SI': true, 'SK': true, 'LC': true, 'SE': true, 'US': true, 'UY': true
             };
 
-            // Territory to parent country mapping
             var territoryToCountry = {
-                'GL': 'DK', // Greenland -> Denmark
-                'GF': 'FR', 'GP': 'FR', 'MQ': 'FR', 'RE': 'FR', 'YT': 'FR', 'PF': 'FR', 'NC': 'FR', // French territories
-                'PR': 'US', 'VI': 'US', 'GU': 'US', 'AS': 'US', 'MP': 'US', // US territories
-                'BM': 'GB', 'KY': 'GB', 'VG': 'GB', 'TC': 'GB', 'FK': 'GB', 'GI': 'GB', // UK territories
-                'HK': 'CN', 'MO': 'CN', // China territories
-                'AW': 'NL', 'CW': 'NL', 'SX': 'NL' // Netherlands territories
+                'GL': 'DK',
+                'GF': 'FR', 'GP': 'FR', 'MQ': 'FR', 'RE': 'FR', 'YT': 'FR', 'PF': 'FR', 'NC': 'FR',
+                'PR': 'US', 'VI': 'US', 'GU': 'US', 'AS': 'US', 'MP': 'US',
+                'BM': 'GB', 'KY': 'GB', 'VG': 'GB', 'TC': 'GB', 'FK': 'GB', 'GI': 'GB',
+                'HK': 'CN', 'MO': 'CN',
+                'AW': 'NL', 'CW': 'NL', 'SX': 'NL'
             };
 
             polygonSeries.mapPolygons.template.setAll({
@@ -1092,23 +1106,17 @@
                 strokeWidth: 1
             });
 
-
             polygonSeries.mapPolygons.template.states.create("hover", {
                 fill: am5.color(0x2a5298)
             });
 
-
-            // Color collected countries and their territories green
             polygonSeries.mapPolygons.template.adapters.add("fill", function(fill, target) {
                 var dataItem = target.dataItem;
                 if (dataItem) {
                     var id = dataItem.get("id");
-                    
-                    // Check if territory belongs to collected country
                     if (territoryToCountry[id]) {
                         id = territoryToCountry[id];
                     }
-                    
                     if (collectedCountries[id]) {
                         return am5.color(0x28a745);
                     }
@@ -1116,7 +1124,6 @@
                 return fill;
             });
 
-            // Name mapping for display
             var nameMap = {
                 'United States of America': 'United States',
                 'Czech Republic': 'Czechia',
@@ -1144,18 +1151,12 @@
                 'Sint Maarten': 'Netherlands'
             };
 
-           
-
             polygonSeries.mapPolygons.template.events.on("click", function(ev) {
                 var countryName = ev.target.dataItem.get("name");
-                
-                // Map territories to parent countries
                 if (nameMap[countryName]) {
                     countryName = nameMap[countryName];
                 }
-                
                 var country = countries.find(c => c.name === countryName);
-                
                 if (country) {
                     openModal(country);
                 }
@@ -1164,6 +1165,7 @@
             chart.set("zoomControl", am5map.ZoomControl.new(root, {}));
             chart.appear(1000, 100);
         });
+    }
     </script>
 </body>
 </html>
