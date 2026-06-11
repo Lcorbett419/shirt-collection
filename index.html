@@ -521,10 +521,6 @@
             box-shadow: 0 5px 15px rgba(0,0,0,0.3);
         }
     </style>
-    <script defer src="https://cdn.amcharts.com/lib/5/index.js"></script>
-    <script defer src="https://cdn.amcharts.com/lib/5/map.js"></script>
-    <script defer src="https://cdn.amcharts.com/lib/5/geodata/worldLow.js"></script>
-    <script defer src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
 </head>   
 <body>
     
@@ -1042,6 +1038,19 @@
         });
 
         renderCountries();
+
+        </script>
+    
+    <!-- Load amCharts libraries -->
+    <script src="https://cdn.amcharts.com/lib/5/index.js"></script>
+    <script src="https://cdn.amcharts.com/lib/5/map.js"></script>
+    <script src="https://cdn.amcharts.com/lib/5/geodata/worldLow.js"></script>
+    <script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
+    
+    <script>
+        
+        // Initialize World Map
+        am5.ready(function() {
 
        // Initialize World Map
         am5.ready(function() {
