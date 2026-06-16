@@ -136,11 +136,25 @@
             box-shadow: 0 10px 40px rgba(0,0,0,0.2);
         }
 
+        .header-title-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 10px;
+        }
+
         .logo {
-            width: 150px;
+            width: 90px;
             height: auto;
-            margin: 0 auto 15px;
             display: block;
+        }
+
+        @media (max-width: 600px) {
+            .logo {
+                width: 60px;
+            }
         }
 
         .progress-container {
@@ -268,8 +282,8 @@
 
         h1 {
             color: #1e3c72;
-            font-size: 3em;
-            margin-bottom: 10px;
+            font-size: 2.5em;
+            margin-bottom: 0;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
         }
 
@@ -556,8 +570,10 @@
         <!-- Home Page -->
         <div id="homePage" class="page-content active">
             <header>
-                <img src="logo.png" alt="Luke's 197 Nations United Logo" class="logo">
-                <h1>Luke's 197 Nations United</h1>
+                <div class="header-title-row">
+                    <img src="logo.png" alt="Luke's 197 Nations United Logo" class="logo">
+                    <h1>Luke's 197 Nations United</h1>
+                </div>
                 <p class="subtitle">A Complete Collection of National Team Shirts</p>
                 
                 <!-- Progress Bar -->
