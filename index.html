@@ -12,6 +12,7 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://lukes197nations.co.uk">
     <title>Luke's 197 Nations United</title>
+    <link rel="icon" type="image/png" href="logo.png">
     <style>
         * {
             margin: 0;
@@ -135,6 +136,13 @@
             box-shadow: 0 10px 40px rgba(0,0,0,0.2);
         }
 
+        .logo {
+            width: 150px;
+            height: auto;
+            margin: 0 auto 15px;
+            display: block;
+        }
+
         .progress-container {
             max-width: 600px;
             margin: 25px auto 20px;
@@ -152,7 +160,7 @@
         .progress-bar-fill {
             height: 100%;
             background: linear-gradient(90deg, #28a745 0%, #20c997 100%);
-            width: 13.2%;
+            width: 15.7%;
             transition: width 1s ease-in-out;
             display: flex;
             align-items: center;
@@ -520,8 +528,15 @@
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(0,0,0,0.3);
         }
+
+        .map-container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
     </style>
-</head>   
+</head>
 <body>
     
     <!-- Navigation Menu -->
@@ -541,7 +556,8 @@
         <!-- Home Page -->
         <div id="homePage" class="page-content active">
             <header>
-                <h1>🌍 Luke's 197 Nations United</h1>
+                <img src="logo.png" alt="Luke's 197 Nations United Logo" class="logo">
+                <h1>Luke's 197 Nations United</h1>
                 <p class="subtitle">A Complete Collection of National Team Shirts</p>
                 
                 <!-- Progress Bar -->
@@ -1038,9 +1054,6 @@
         });
 
         renderCountries();
-
-        </script>
-    
     </script>
     
     <script>
@@ -1057,7 +1070,6 @@
         loadScript('https://cdn.amcharts.com/lib/5/map.js', function() {
             loadScript('https://cdn.amcharts.com/lib/5/geodata/worldLow.js', function() {
                 loadScript('https://cdn.amcharts.com/lib/5/themes/Animated.js', function() {
-                    // Now initialize the map
                     initializeMap();
                 });
             });
